@@ -9,11 +9,13 @@ maksLiczba = int(input("Podaj maksymalna losowana liczbe: "))
 print(f"Wytypuj {ileLiczb} z {maksLiczba}, liczb: ")
 
 wyniki = []
+i = 0
 
-for ileLiczb in range(ileLiczb):
+while i < ileLiczb:
     liczba = random.randint(1, maksLiczba)
-    print(liczba)
-    wyniki.append(liczba)
+    if wyniki.count(liczba) == 0:
+        wyniki.append(liczba)
+        i = i + 1
 
 
-print(wyniki)
+print(f"Wyniki {wyniki}")
