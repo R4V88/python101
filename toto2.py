@@ -3,9 +3,16 @@
 
 import random
 
-ileLiczb = int(input("Podaj ilosc typowanych liczb: "))
-maksLiczba = int(input("Podaj maksymalna losowana liczbe: "))
+try:
+    ileLiczb = int(input("Podaj ilosc typowanych liczb: "))
+    maksLiczba = int(input("Podaj maksymalna losowana liczbe: "))
 
+    if ileLiczb > maksLiczba:
+        print("Niepoprawne dane!")
+        exit()
+except ValueError:
+    print("Błędne dane!")
+    exit()
 
 
 wyniki = []
@@ -18,14 +25,18 @@ while i < ileLiczb:
         i = i + 1
 
 
-print(f"Wytypuj {ileLiczb} z {maksLiczba} liczb: ")
-j = 0
 for j in range(3):
+    print(f"Wytypuj {ileLiczb} z {maksLiczba} liczb: ")
     typy = set()
     i=0
     while i < ileLiczb:
-        typ = int(input(f"Podaj liczbe {i + 1}: "))
-        if typ not in typy:
+        try:
+            typ = int(input(f"Podaj liczbe {i + 1}: "))
+        except ValueError:
+            print("Błędne dane")
+            continue
+
+        if 0 < typ <= maksLiczba and typ not in typy:
             typy.add(typ)
             i = i + 1
 
