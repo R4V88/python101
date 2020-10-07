@@ -1,56 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import random
+from totomodul import ustawienia, losujliczby, pobierztypy, wyniki
 
-try:
-    ileLiczb = int(input("Podaj ilosc typowanych liczb: "))
-    maksLiczba = int(input("Podaj maksymalna losowana liczbe: "))
+def main(args):
 
-    if ileLiczb > maksLiczba:
-        print("Niepoprawne dane!")
-        exit()
-except ValueError:
-    print("Błędne dane!")
-    exit()
+    ileLiczb, maksLiczba, ileLosowan = ustawienia()
 
+    liczby = losujliczby(ileLiczb, maksLiczba)
 
-wyniki = []
-i = 0
+    for i in range(ileLosowan):
+        typy = pobierztypy(ileLiczb, maksLiczba)
+        ileTraf = wyniki(set(liczby), typy)
 
-while i < ileLiczb:
-    liczba = random.randint(1, maksLiczba)
-    if wyniki.count(liczba) == 0:
-        wyniki.append(liczba)
-        i = i + 1
+    print("Wylosowane liczby:", liczby)
+    return 0
 
-
-for j in range(3):
-    print(f"Wytypuj {ileLiczb} z {maksLiczba} liczb: ")
-    typy = set()
-    i=0
-    while i < ileLiczb:
-        try:
-            typ = int(input(f"Podaj liczbe {i + 1}: "))
-        except ValueError:
-            print("Błędne dane")
-            continue
-
-        if 0 < typ <= maksLiczba and typ not in typy:
-            typy.add(typ)
-            i = i + 1
-
-    trafione = set(wyniki) & typy
-    if trafione:
-        print(f"\nIlość trafień: {len(trafione)}")
-        print(f"\nTrafione liczby: {trafione}")
-    else:
-        print("Brak trafien. \nTry again!")
-
-    print("\n" + "x" * 40 + "\n")
-
-
-print(f"\n****** Wyniki {wyniki}, tak dla pewności ******\n")
+if __name__ == '__main__':
+    import sys
+    sys.exit(main(sys.argv))
 
 # | - suma zbirow
 # - - różnica od A dla B
